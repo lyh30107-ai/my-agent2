@@ -6,14 +6,12 @@ from langchain.chat_models import init_chat_model
 from pydantic import BaseModel, Field
 
 
-# 1. 수업 59~62쪽: .env에서 키를 읽고 화면을 준비한다
 load_dotenv()
 st.title("💱 환율 조회 챗봇")
 st.caption("Frankfurter에서 질문할 때마다 최신 일별 환율을 조회합니다.")
 st.info("예시: 100달러는 원화로 얼마야? / 1유로는 엔화로 얼마야?")
 
 
-# 2. 앞서 배운 구조화된 출력: 질문에서 계산에 필요한 세 값만 읽는다.
 class ExchangeRequest(BaseModel):
     base: str | None = Field(description="바꿀 통화의 영문 코드. 불분명하면 null")
     quote: str | None = Field(description="받을 통화의 영문 코드. 불분명하면 null")
@@ -59,7 +57,6 @@ def answer_question(messages):
     )
 
 
-# 3. 수업 47~53쪽: 질문을 받고 세션에 대화 기록을 저장한다.
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
